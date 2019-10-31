@@ -34,6 +34,7 @@
                                     </label>
                                     <del v-if="todo.done">{{ todo.text }}</del>
                                     <span v-else>{{ todo.text }}</span>
+                                    
                                  <button v-on:click="removeTodo(todo.id)">X</button>
                                 </div>
                                     
