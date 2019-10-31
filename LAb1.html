@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+        </script>
+        <link rel="stylesheet" href="bootstrap.min.css"></link>
+    </head>
+
+    <body>
+        <div id="app" style="padding:30px; margin:auto;">
+            <h1>{{title}}:</h1>
+            <!-- <ul>                                   
+                    <span>&nbsp</span>
+                <li v-for="todo in todos" >
+                        <label class="checkbox"><input type="checkbox" >
+                        </label>
+                     {{todo.text}}<button v-on:click="removeTodo(todo.id)">X</button>
+                </li>
+            </ul> -->
+            <div style="margin: auto;">
+               <form method=" POST">
+                <div class="form-group">
+                   <input type="text" placeholder="Add Todo..." v-model="input" ></input>
+                <button type="button"  v-on:click="add()" class="btn btn-default">Add</button> 
+                </div>
+                
+            </form>
+            <div class="row">
+                    <div class="col-md-12">
+                        <h2>List</h2>
+                        <ul class="list-group">
+                            <li v-for="todo in todos" class="list-group-item">
+                                <div style="padding-left:15px;">
+                                    <label class="checkbox"><input type="checkbox" v-model="todo.done">
+                                    </label>
+                                    <del v-if="todo.done">{{ todo.text }}</del>
+                                    <span v-else>{{ todo.text }}</span>
+                                 <button v-on:click="removeTodo(todo.id)">X</button>
+                                </div>
+                                    
+                            </li>
+                        </ul>
+                    </div>
+                </div>  
+            </div>
+                      
+        </div>
+    </body>
+
+    <script>
+        new Vue ({
+            el: "#app",
+            data: {
+                title: 'TODOS',
+                todos: [
+
+                ],
+                input: ""
+            },
+            methods: {
+                add() {
+                    const text = this.input
+                    this.todos.push({text, done: false, id: Date.now()})
+                    this.input = "";
+                },
+                removeTodo(id) {
+                    this.todos = this.todos.filter(todo => todo.id !== id)
+                },
+                check(todo){
+                    todo.done = !todo.done
+                    }
+            }
+        })
+    </script>
+</html>
